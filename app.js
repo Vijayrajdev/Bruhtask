@@ -4,11 +4,13 @@ const addButton = document.querySelector('.addbutton')
 const taskList = document.querySelector('#list__task')
 const completedTaskList = document.querySelector('#list__completed')
 const countSpace = document.querySelector('.Count-space')
+const saveContainer = document.querySelector('.save-container')
 
 // Eventlisteners
 addButton.addEventListener('click', addTodo)
 taskList.addEventListener('click', deleteTask)
-
+taskList.addEventListener('click', editTask)
+taskList.addEventListener('click', saveEdits)
 
 // Functions
 
@@ -32,11 +34,11 @@ function addTodo() {
           <ion-icon name="checkmark-done-outline" class="complete-button"></ion-icon>
         </button>
       </div>
-      <div class="d-flex">
+      <div class="d-flex buttoncontainer">
         <button type="button" class="btn btn-outline-success editbutton mr-1">
           <ion-icon name="create-outline" class="edit-button"></ion-icon>
         </button>
-        <button type="button" class="btn btn-outline-danger deletebutton">
+        <button type="button" class="btn btn-outline-danger deletebutton mr-1">
         <ion-icon name="trash-outline" class="delete-button"></ion-icon>
         </button>
       </div>
@@ -53,9 +55,11 @@ function addTodo() {
 
 }
 
-// Deleting Task
+// Deleting & Checking Task
 function deleteTask(e) {
   const item = e.target
+
+  // delete task
   if (item.classList[0] === "delete-button") {
     const todo = item.parentElement.parentElement.parentElement.parentElement
     todo.remove()
@@ -64,18 +68,44 @@ function deleteTask(e) {
     todo.remove()
   }
 
+  // Check task
   if (item.classList[0] === "complete-button") {
-    const todo = item.parentElement.parentElement
+    const todo = item.parentElement.parentElement.childNodes[1]
+    todo.classList.toggle('completed')
+  } else if (item.classList[1] === "completedbutton") {
+    const todo = item.parentElement.childNodes[1]
     todo.classList.toggle('completed')
   }
+}
 
+// Editing task
+
+function editTask(e) {
+  const item = e.target
+  const buttonContainer = document.querySelector(".buttoncontainer")
+  // Edit task
   if (item.classList[0] === 'edit-button') {
-    const todo = item.parentElement.parentElement.parentElement.parentElement
+    let ele = document.createElement('button')
+    ele.classList.add('savebutton')
+    ele.classList.add("btn,btn-outline-success")
+    ele.innerHTML = `<button type="button" class="btn btn-outline-success mr-1">
+          <ion-icon name="checkmark-done-outline" class="save-button"></ion-icon>
+        </button>`
+    buttonContainer.appendChild(ele)
+    const todo = item.parentElement.parentElement.parentElement.childNodes[1].childNodes[1]
+    console.log(todo);
     todo.setAttribute('contenteditable', "true")
   }
+}
 
-  if (item.classList[2] === 'addbutton') {
-    const todo = item.parentElement.parentElement.parentElement.parentElement
+// Save Editing
+function saveEdits(e) {
+  const item = e.target
+  const buttonContainer = document.querySelector(".savebutton")
+  //save edit
+  if (item.classList[0] === "save-button") {
+    const todo = item.parentElement.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1]
     todo.setAttribute('contenteditable', "false")
+    buttonContainer.remove()
   }
 }

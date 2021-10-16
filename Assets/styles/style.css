@@ -5,13 +5,14 @@
 }
 
 .completedbutton {
-  opacity: 0;
+  opacity: 1;
   color: rgba(0, 0, 0, 0.432);
   font-size: 20px;
+  transition: all 0.3s ease;
 }
 
 .task__lists:hover .completedbutton {
-  opacity: 1;
+  color: #407bff;
 }
 
 .completed {
@@ -53,6 +54,10 @@ select {
   transition: all 0.3s ease;
 }
 
+button {
+  border: none;
+  background: none;
+}
 /* Footer styles */
 
 .bd-placeholder-img {

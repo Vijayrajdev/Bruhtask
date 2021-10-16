@@ -8,7 +8,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
+    <link
+      rel="shortcut icon"
+      href="assets/images/logo.png"
+      type="image/x-icon"
+    />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -147,13 +151,16 @@
               >
               <input type="text" class="form-control" id="tasks" />
             </div>
-            <button type="button" class="btn btn-outline-primary addbutton">
-              Submit
-            </button>
+            <div class="save-container d-flex">
+               <button type="button" class="add-button addbutton btn btn-outline-primary mx-2">
+                Submit
+              </button>
+            </div>
           </form>
 
           <!-- Task Container -->
-          <label for="tasks" class="d-flex form-label font-weight-bold ml-lg-5">
+          <section>
+             <label for="tasks" class="d-flex form-label font-weight-bold ml-lg-5">
             <div class="mr-2">Tasks</div>
             <div class="select">
               <select class="form-select form-select-lg mb-3">
@@ -174,6 +181,7 @@
           <div class="task__container mb-3">
             <ul class="list-group list-group-flush" id="list__task"></ul>
           </div>
+          </section>
       </section>
     </main>
 
