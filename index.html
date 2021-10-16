@@ -153,44 +153,27 @@
           </form>
 
           <!-- Task Container -->
-          <label for="tasks" class="form-label font-weight-bold ml-lg-5"
-            >Tasks
-            <span class="badge bg-primary rounded-pill text-light"
-              >0</span
-            ></label
-          >
+          <label for="tasks" class="d-flex form-label font-weight-bold ml-lg-5">
+            <div class="mr-2">Tasks</div>
+            <div class="select">
+              <select class="form-select form-select-lg mb-3">
+                <option selected>select</option>
+                <option value="All">All</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+            <div class="Count-space">
+              <!-- <p>
+                <span class="badge bg-primary rounded-pill text-light">
+                  0
+                </span>
+              </p> -->
+            </div>
+          </label>
           <div class="task__container mb-3">
-            <ul class="list-group list-group-flush list__task">
-              <div></div>
-            </ul>
+            <ul class="list-group list-group-flush" id="list__task"></ul>
           </div>
-
-          <!-- Completed tasks Container -->
-          <label for="tasks" class="form-label font-weight-bold ml-lg-5"
-            >Completed
-            <span class="badge bg-primary rounded-pill text-light"
-              >0</span
-            ></label
-          >
-          <div class="task__container mb-3">
-            <ul class="list-group list-group-flush">
-              <div></div>
-            </ul>
-          </div>
-
-          <!-- Pending tasks Container -->
-          <label for="tasks" class="form-label font-weight-bold ml-lg-5"
-            >Pending
-            <span class="badge bg-primary rounded-pill text-light"
-              >0</span
-            ></label
-          >
-          <div class="task__container mb-3">
-            <ul class="list-group list-group-flush">
-              <div></div>
-            </ul>
-          </div>
-        </div>
       </section>
     </main>
 
