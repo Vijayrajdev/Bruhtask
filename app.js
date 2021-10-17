@@ -2,21 +2,25 @@
 const taskInput = document.getElementById('tasks')
 const addButton = document.querySelector('.addbutton')
 const taskList = document.querySelector('#list__task')
-const completedTaskList = document.querySelector('#list__completed')
-const countSpace = document.querySelector('.Count-space')
+// const completedTaskList = document.querySelector('#list__completed')
+// const countSpace = document.querySelector('.Count-space')
 const saveContainer = document.querySelector('.save-container')
+const filterOption = document.querySelector('#filter-todo');
 
 // Eventlisteners
 addButton.addEventListener('click', addTodo)
 taskList.addEventListener('click', deleteTask)
 taskList.addEventListener('click', editTask)
 taskList.addEventListener('click', saveEdits)
+filterOption.addEventListener('click', filterTodo)
 
 // Functions
 
 // Adding Task
-function addTodo() {
+function addTodo(e) {
 
+  // Prevent reload
+  e.preventDefault()
   // For tasks
   let element1 = document.createElement('div')
   element1.classList.add('.task-list')
@@ -70,11 +74,13 @@ function deleteTask(e) {
 
   // Check task
   if (item.classList[0] === "complete-button") {
-    const todo = item.parentElement.parentElement.childNodes[1]
-    todo.classList.toggle('completed')
+    const todo = item.parentElement.parentElement.parentElement.parentElement
+    console.log(todo)
+    todo.classList.toggle('completedtask')
   } else if (item.classList[1] === "completedbutton") {
-    const todo = item.parentElement.childNodes[1]
-    todo.classList.toggle('completed')
+    const todo = item.parentElement.parentElement.parentElement
+    console.log(todo)
+    todo.classList.toggle('completedtask')
   }
 }
 
@@ -108,4 +114,31 @@ function saveEdits(e) {
     todo.setAttribute('contenteditable', "false")
     buttonContainer.remove()
   }
+}
+
+// Filtering Todo
+function filterTodo(e) {
+  const todos = taskList.childNodes
+  console.log(todos);
+  todos.forEach((todo) => {
+    switch (e.target.value) {
+      case 'All':
+        todo.style.display = 'block'
+        break;
+      case 'Completed':
+        if (todo.classList.contains('completedtask')) {
+          todo.style.display = 'block'
+        } else {
+          todo.style.display = 'none'
+        }
+        break;
+      case "Pending":
+        if (!todo.classList.contains('completedtask')) {
+          todo.style.display = 'block'
+        } else {
+          todo.style.display = 'none'
+        }
+        break;
+    }
+  })
 }

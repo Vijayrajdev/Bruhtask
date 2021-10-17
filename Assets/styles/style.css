@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #d9effd57;
+}
+
 .completedbutton {
   opacity: 1;
   color: rgba(0, 0, 0, 0.432);
@@ -15,7 +19,7 @@
   color: #407bff;
 }
 
-.completed {
+.completedtask {
   text-decoration: line-through;
   opacity: 0.5;
 }
