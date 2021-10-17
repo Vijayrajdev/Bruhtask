@@ -5,9 +5,10 @@ const taskList = document.querySelector('#list__task')
 // const completedTaskList = document.querySelector('#list__completed')
 // const countSpace = document.querySelector('.Count-space')
 const saveContainer = document.querySelector('.save-container')
-const filterOption = document.querySelector('#filter-todo');
+const filterOption = document.querySelector('#filter-todo')
 
 // Eventlisteners
+document.addEventListener('DOMContentLoaded', getTodos)
 addButton.addEventListener('click', addTodo)
 taskList.addEventListener('click', deleteTask)
 taskList.addEventListener('click', editTask)
@@ -25,7 +26,7 @@ function addTodo(e) {
   let element1 = document.createElement('div')
   element1.classList.add('.task-list')
 
-  // Tasks Adder template
+  // Task template
   let taskTemplate = `<div
       class="task__lists d-flex align-items-center justify-content-around mb-3"
     >
@@ -47,16 +48,18 @@ function addTodo(e) {
         </button>
       </div>
     </div>`
-
   // For tasks
-  if (!taskInput.value) { console.log("error"); }
+  if (!taskInput.value) { console.log("error") }
   else {
     element1.innerHTML = taskTemplate
     taskList.appendChild(element1)
+
+    // Add todo to local storage
+    saveLocalTodos(taskInput.value)
   }
+
   // Clearing input
   taskInput.value = ""
-
 }
 
 // Deleting & Checking Task
@@ -66,9 +69,11 @@ function deleteTask(e) {
   // delete task
   if (item.classList[0] === "delete-button") {
     const todo = item.parentElement.parentElement.parentElement.parentElement
+    removeLocalTodo(todo)
     todo.remove()
   } else if (item.classList[2] === 'deletebutton') {
     const todo = item.parentElement.parentElement.parentElement
+    removeLocalTodo(todo)
     todo.remove()
   }
 
@@ -113,6 +118,7 @@ function saveEdits(e) {
     const todo = item.parentElement.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1]
     todo.setAttribute('contenteditable', "false")
     buttonContainer.remove()
+    let newTodo = taskList.children[0].children[0].children[0].children[0].innerHTML
   }
 }
 
@@ -142,3 +148,79 @@ function filterTodo(e) {
     }
   })
 }
+
+// Save local Todos
+
+function saveLocalTodos(todo) {
+  // Check
+  let todos
+  if (localStorage.getItem('todos') === null) {
+    todos = []
+  } else {
+    todos = JSON.parse(localStorage.getItem('todos'))
+  }
+
+  todos.push(todo)
+  localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+function getTodos() {
+  // Check
+  let todos
+  if (localStorage.getItem('todos') === null) {
+    todos = []
+  } else {
+    todos = JSON.parse(localStorage.getItem('todos'))
+  }
+
+  todos.forEach((todo) => {
+    console.log('hello');
+    // For tasks
+    let element1 = document.createElement('div')
+    element1.classList.add('.task-list')
+
+    // Task template
+    let taskTemplate = `<div
+      class="task__lists d-flex align-items-center justify-content-around mb-3"
+    >
+      <div
+        class="d-flex align-items-center justify-content-between w-75 mr-2"
+        style="background-color: #fff"
+      >
+        <p class="list-group-item form-check">${todo}</p>
+        <button type="button" class="btn completedbutton">
+          <ion-icon name="checkmark-done-outline" class="complete-button"></ion-icon>
+        </button>
+      </div>
+      <div class="d-flex buttoncontainer">
+        <button type="button" class="btn btn-outline-success editbutton mr-1">
+          <ion-icon name="create-outline" class="edit-button"></ion-icon>
+        </button>
+        <button type="button" class="btn btn-outline-danger deletebutton mr-1">
+        <ion-icon name="trash-outline" class="delete-button"></ion-icon>
+        </button>
+      </div>
+    </div>`
+
+    // For tasks
+    element1.innerHTML = taskTemplate
+    taskList.appendChild(element1)
+  })
+}
+
+// Remove Todo
+function removeLocalTodo(todo) {
+  // Check
+  let todos
+  if (localStorage.getItem('todos') === null) {
+    todos = []
+  } else {
+    todos = JSON.parse(localStorage.getItem('todos'))
+  }
+  const todoChildren = todo.children[0].children[0].children[0].innerHTML
+  todos.splice(todos.indexOf(todoChildren), 1)
+  localStorage.setItem('todos', JSON.stringify(todos))
+  console.log(todos.indexOf(todoChildren))
+}
+
+
