@@ -49,7 +49,7 @@ function addTodo(e) {
       </div>
     </div>`
   // For tasks
-  if (!taskInput.value) { console.log("error") }
+  if (!taskInput.value) { window.alert('Hey there!! Add some task😉') }
   else {
     element1.innerHTML = taskTemplate
     taskList.appendChild(element1)
@@ -80,11 +80,9 @@ function deleteTask(e) {
   // Check task
   if (item.classList[0] === "complete-button") {
     const todo = item.parentElement.parentElement.parentElement.parentElement
-    console.log(todo)
     todo.classList.toggle('completedtask')
   } else if (item.classList[1] === "completedbutton") {
     const todo = item.parentElement.parentElement.parentElement
-    console.log(todo)
     todo.classList.toggle('completedtask')
   }
 }
@@ -104,7 +102,6 @@ function editTask(e) {
         </button>`
     buttonContainer.appendChild(ele)
     const todo = item.parentElement.parentElement.parentElement.childNodes[1].childNodes[1]
-    console.log(todo);
     todo.setAttribute('contenteditable', "true")
   }
 }
@@ -118,7 +115,6 @@ function saveEdits(e) {
     const todo = item.parentElement.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1]
     todo.setAttribute('contenteditable', "false")
     buttonContainer.remove()
-    let newTodo = taskList.children[0].children[0].children[0].children[0].innerHTML
   }
 }
 
@@ -159,7 +155,6 @@ function saveLocalTodos(todo) {
   } else {
     todos = JSON.parse(localStorage.getItem('todos'))
   }
-
   todos.push(todo)
   localStorage.setItem('todos', JSON.stringify(todos))
 }
@@ -174,7 +169,6 @@ function getTodos() {
   }
 
   todos.forEach((todo) => {
-    console.log('hello');
     // For tasks
     let element1 = document.createElement('div')
     element1.classList.add('.task-list')
@@ -220,7 +214,5 @@ function removeLocalTodo(todo) {
   const todoChildren = todo.children[0].children[0].children[0].innerHTML
   todos.splice(todos.indexOf(todoChildren), 1)
   localStorage.setItem('todos', JSON.stringify(todos))
-  console.log(todos.indexOf(todoChildren))
 }
-
 
