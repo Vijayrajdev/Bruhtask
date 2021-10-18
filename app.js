@@ -2,8 +2,6 @@
 const taskInput = document.getElementById('tasks')
 const addButton = document.querySelector('.addbutton')
 const taskList = document.querySelector('#list__task')
-// const completedTaskList = document.querySelector('#list__completed')
-// const countSpace = document.querySelector('.Count-space')
 const saveContainer = document.querySelector('.save-container')
 const filterOption = document.querySelector('#filter-todo')
 
@@ -88,7 +86,6 @@ function deleteTask(e) {
 }
 
 // Editing task
-
 function editTask(e) {
   const item = e.target
   const buttonContainer = document.querySelector(".buttoncontainer")
@@ -121,7 +118,6 @@ function saveEdits(e) {
 // Filtering Todo
 function filterTodo(e) {
   const todos = taskList.childNodes
-  console.log(todos);
   todos.forEach((todo) => {
     switch (e.target.value) {
       case 'All':
@@ -146,7 +142,6 @@ function filterTodo(e) {
 }
 
 // Save local Todos
-
 function saveLocalTodos(todo) {
   // Check
   let todos
@@ -159,6 +154,8 @@ function saveLocalTodos(todo) {
   localStorage.setItem('todos', JSON.stringify(todos))
 }
 
+
+// Get todos
 function getTodos() {
   // Check
   let todos

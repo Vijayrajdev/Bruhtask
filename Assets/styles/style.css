@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #d9effd57;
 }
@@ -24,6 +28,14 @@ body {
   opacity: 0.5;
 }
 
+.prim a {
+  text-decoration: none;
+}
+
+.prim:hover.prim a,
+.prim a:hover {
+  color: #fff;
+}
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
